@@ -1,0 +1,4 @@
+service:
+  articles:
+    host: localhost
+    port: "1102"

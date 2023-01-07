@@ -1,4 +1,4 @@
-package router
+package article
 
 import (
 	repo "github.com/ksaepudin/alphaindosoft-test-micro-aticle-service/app/repository/db"

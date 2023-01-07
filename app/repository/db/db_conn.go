@@ -1,9 +1,8 @@
 package db
 
 import (
-	"log"
-
 	cfg "github.com/ksaepudin/alphaindosoft-test-micro-aticle-service/config"
+	"log"
 )
 
 var (

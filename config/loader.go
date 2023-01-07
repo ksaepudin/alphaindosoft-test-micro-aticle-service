@@ -9,11 +9,13 @@ import (
 	"strings"
 
 	"github.com/ksaepudin/alphaindosoft-test-micro-aticle-service/config/db"
+	"github.com/ksaepudin/alphaindosoft-test-micro-aticle-service/config/service"
 	"github.com/spf13/viper"
 )
 
 type config struct {
 	Database db.DatabaseList
+	Service  service.ServiceList
 }
 
 var cfg config
@@ -31,6 +33,14 @@ func init() {
 	viper.AddConfigPath(dir + "/db")
 	viper.SetConfigType("yaml")
 	viper.SetConfigName("db.yml")
+	err = viper.MergeInConfig()
+	if err != nil {
+		panic(fmt.Errorf("Cannot load database config: %v", err))
+	}
+
+	viper.AddConfigPath(dir + "/service")
+	viper.SetConfigType("yaml")
+	viper.SetConfigName("service.yml")
 	err = viper.MergeInConfig()
 	if err != nil {
 		panic(fmt.Errorf("Cannot load database config: %v", err))
