@@ -1,0 +1,14 @@
+database:
+  articles:
+    mysql:
+      host: localhost
+      port: 3306
+      username: root
+      password: 
+      dbname: db_articles
+      adapter: mysql
+      maxOpen: 10
+      maxIdle: 7
+      idleLifeTime: 60
+      openLifeTime: 60
+      customPool: true
