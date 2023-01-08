@@ -11,6 +11,7 @@ import (
 
 type ArticlesUsecase interface {
 	AddAtricles(data interface{}) (interface{}, error)
+	GetArticleByParam(data interface{}) (interface{}, error)
 }
 
 type articles struct {
@@ -40,5 +41,18 @@ func (m *articles) AddAtricles(data interface{}) (interface{}, error) {
 		return nil, err
 	}
 
+	return res, nil
+}
+
+func (m *articles) GetArticleByParam(data interface{}) (interface{}, error) {
+	if data == nil {
+		return nil, errors.New("Requset Data Nil")
+	}
+	reqInput := data.(*entity.SearchArticlesRequest)
+
+	res, err := m.repoArticle.GetArticleByParam(reqInput)
+	if err != nil {
+		return nil, err
+	}
 	return res, nil
 }

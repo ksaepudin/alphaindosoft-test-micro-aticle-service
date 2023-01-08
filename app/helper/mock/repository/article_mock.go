@@ -17,3 +17,12 @@ func (m *MockArticleRepo) AddAtriclesDB(req *entity.Articles) (interface{}, erro
 	}
 	return &res, call.Error(1)
 }
+
+func (m *MockArticleRepo) GetArticleByParam(req *entity.SearchArticlesRequest) (interface{}, error) {
+	call := m.Called(req)
+	res := call.Get(0)
+	if res == nil {
+		return nil, call.Error(1)
+	}
+	return &res, call.Error(1)
+}

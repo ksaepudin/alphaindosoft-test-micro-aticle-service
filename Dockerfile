@@ -7,7 +7,7 @@ COPY go.sum .
 
 COPY . .
 
-RUN make build
+RUN go build -o ./main cmd/server/rest/main.go
 
 CMD ["/app/main"]
 

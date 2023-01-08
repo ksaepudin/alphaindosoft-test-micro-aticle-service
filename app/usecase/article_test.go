@@ -50,3 +50,39 @@ func TestAddAtricles(t *testing.T) {
 		})
 	})
 }
+
+func TestGetArticleByParam(t *testing.T) {
+	mockArticleRepo := &mockRepo.MockArticleRepo{}
+	req := &entity.SearchArticlesRequest{
+		Search: "Test",
+		Author: "Test",
+	}
+
+	res := []*entity.Articles{{Id: "Suksess", Author: "Suksess", Title: "Suksess", Body: "Suksess", CreatedAt: "Suksess"}}
+	Convey("Test Usecase GetArticleByParam", t, func() {
+		Convey("negative scenarios", func() {
+			Convey("Request Data nil", func() {
+				uc := NewArticleUsecase(mockArticleRepo)
+				resp, err := uc.GetArticleByParam(nil)
+				So(resp, ShouldBeNil)
+				So(err, ShouldNotBeNil)
+			})
+			Convey("respone err GetArticleByParam ", func() {
+				mockArticleRepo.On("GetArticleByParam", mock.Anything).Return(nil, errors.New("Some Error")).Once()
+				uc := NewArticleUsecase(mockArticleRepo)
+				resp, err := uc.GetArticleByParam(req)
+				So(resp, ShouldBeNil)
+				So(err, ShouldNotBeNil)
+			})
+		})
+		Convey("positive scenarios", func() {
+			Convey("respone err GetArticleByParam ", func() {
+				mockArticleRepo.On("GetArticleByParam", mock.Anything).Return(res, nil).Once()
+				uc := NewArticleUsecase(mockArticleRepo)
+				resp, err := uc.GetArticleByParam(req)
+				So(resp, ShouldNotBeNil)
+				So(err, ShouldBeNil)
+			})
+		})
+	})
+}

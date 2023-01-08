@@ -14,4 +14,6 @@ func Articles(e *echo.Echo) {
 	articleService := service.NewArticle(articlesUsecase)
 	grpArticle := e.Group("/article")
 	grpArticle.POST("", articleService.AddAtricles)
+	grpArticle.GET("", articleService.GetArticleByParam)
+	// grpArticle.GET(":article", articleService.GetArticleByParam)
 }

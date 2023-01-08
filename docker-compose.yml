@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  article-mysql:
+    container_name: db_articles
+    image: mysql:5.7
+    restart: always
+    hostname: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    extra_hosts:
+      - localhost:127.0.0.1
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+    ports: 
+      - 3307:3306
+    volumes:
+      - mysqldb:/var/lib/mysql
+
+volumes:
+  mysqldb:
